@@ -14,7 +14,6 @@ from app.services.providers.alpha_vantage import AlphaVantageProvider
 router = APIRouter()
 
 
-
 # Dependency
 def get_db():
     db = SessionLocal()
