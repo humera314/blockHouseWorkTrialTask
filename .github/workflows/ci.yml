@@ -7,22 +7,8 @@ on:
     branches: [ main ]
 
 jobs:
-  lint-test-build:
+  lint-test:
     runs-on: ubuntu-latest
-
-    services:
-      postgres:
-        image: postgres:14
-        env:
-          POSTGRES_DB: market_data
-          POSTGRES_USER: postgres
-          POSTGRES_PASSWORD: postgres
-        ports: [5432:5432]
-        options: >-
-          --health-cmd="pg_isready"
-          --health-interval=10s
-          --health-timeout=5s
-          --health-retries=5
 
     env:
       DATABASE_URL: postgresql://postgres:postgres@localhost:5432/market_data
@@ -49,6 +35,18 @@ jobs:
         run: |
           pytest
 
-      - name: Build Docker image
+  docker-compose-services:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Set up Docker Compose
         run: |
-          docker build -t market-data-service .
+          sudo curl -L "https://github.com/docker/compose/releases/download/v2.20.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+          sudo chmod +x /usr/local/bin/docker-compose
+          docker-compose version
+
+      - name: Run Docker Compose
+        run: |
+          docker-compose up -d --build
