@@ -2,10 +2,12 @@
 
 from fastapi import APIRouter, Depends
 from sqlalchemy.orm import Session
+
 from app.core.db import SessionLocal
 from app.models.market_data import RawMarketData
 
 router = APIRouter()
+
 
 def get_db():
     db = SessionLocal()
@@ -13,6 +15,7 @@ def get_db():
         yield db
     finally:
         db.close()
+
 
 @router.get("/prices/latest")
 def get_latest_price(symbol: str, db: Session = Depends(get_db)):
@@ -27,6 +30,6 @@ def get_latest_price(symbol: str, db: Session = Depends(get_db)):
             "symbol": record.symbol,
             "price": record.price,
             "timestamp": record.timestamp,
-            "provider": record.provider
+            "provider": record.provider,
         }
     return {"error": "Price not found"}

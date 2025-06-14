@@ -1,7 +1,9 @@
-from app.core.db import Base, engine  # Make sure this points to your actual Base and engine
-from app.models.job_config import PollingJobConfig
-from app.models.market_data import RawMarketData
-from app.models.symbol_average import SymbolAverage
+from app.core.db import (  # Make sure this points to your actual Base and engine
+    Base, engine)
+
+# from app.models.job_config import PollingJobConfig
+# from app.models.market_data import RawMarketData
+# from app.models.symbol_average import SymbolAverage
 
 print("🛠️ Creating database tables...")
 

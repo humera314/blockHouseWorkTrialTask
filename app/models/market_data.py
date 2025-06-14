@@ -1,7 +1,10 @@
-from sqlalchemy import Column, String, Float, DateTime
-from app.core.db import Base
 import uuid
 from datetime import datetime
+
+from sqlalchemy import Column, DateTime, Float, String
+
+from app.core.db import Base
+
 
 class RawMarketData(Base):
     __tablename__ = "raw_market_data"

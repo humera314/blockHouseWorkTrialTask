@@ -1,6 +1,9 @@
-from sqlalchemy import Column, String, Float, DateTime
-from app.core.db import Base
 from datetime import datetime, timezone
+
+from sqlalchemy import Column, DateTime, Float, String
+
+from app.core.db import Base
+
 
 class SymbolAverage(Base):
     __tablename__ = "symbol_averages"
