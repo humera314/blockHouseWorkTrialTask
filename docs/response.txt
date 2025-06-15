@@ -1,0 +1,34 @@
+### ✅ POST Polling Job
+**Endpoint:**
+```
+POST /prices/poll
+```
+**Request Body:**
+```json
+{
+  "symbols": ["AAPL", "MSFT"],
+  "interval": 60,
+  "provider": "alpha_vantage"
+}
+```
+
+**Sample Response:**
+```json
+{
+  "job_id": "poll_20250615024308",
+  "status": "accepted",
+  "config": {
+    "symbols": ["AAPL", "MSFT"],
+    "interval": 60,
+    "provider": "alpha_vantage"
+  }
+}
+```
+
+---
+
+## 📹 Video Walkthrough
+
+[🎥 Watch on Loom](https://www.loom.com/share/42c76ebd47a94d39ace9a3dce02b498c?sid=79bdb495-009e-4fd4-a564-85fff6bce218)
+
+---
