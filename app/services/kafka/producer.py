@@ -9,32 +9,32 @@ from sqlalchemy.orm import Session, sessionmaker
 
 from app.models.market_data import RawMarketData
 
-# ✅ Load environment variables
+#  Load environment variables
 load_dotenv()
 
-# ✅ Fetch database URL from .env
+#  Fetch database URL from .env
 DATABASE_URL = os.getenv(
     "DATABASE_URL", "postgresql://postgres:postgres@localhost:5432/market_data"
 )
-print("📄 Loaded DATABASE_URL:", DATABASE_URL)
+print(" Loaded DATABASE_URL:", DATABASE_URL)
 
-# ✅ Setup DB session
+#  Setup DB session
 engine = create_engine(DATABASE_URL)
 SessionLocal = sessionmaker(bind=engine)
 
-# ✅ Kafka Producer Configuration
+#  Kafka Producer Configuration
 producer_config = {"bootstrap.servers": "localhost:9092"}
 producer = Producer(producer_config)
 
 
 def publish_price_event(data: dict):
-    # ✅ Publish to Kafka
+    # Publish to Kafka
     payload = json.dumps(data)
     producer.produce("price-events", value=payload.encode("utf-8"))
     producer.flush()
-    print(f"✅ Published event: {data}")
+    print(f" Published event: {data}")
 
-    # ✅ Store to PostgreSQL
+    #  Store to PostgreSQL
     try:
         db: Session = SessionLocal()
         raw_data = RawMarketData(
@@ -49,7 +49,7 @@ def publish_price_event(data: dict):
         db.close()
         print("📝 Stored event in DB.")
     except Exception as e:
-        print("❌ Failed to save to DB:", e)
+        print(" Failed to save to DB:", e)
 
 
 if __name__ == "__main__":

@@ -1,0 +1,32 @@
+for http://127.0.0.1:8000/prices/latest?symbol=AAPL&provider=alpha_vantage
+response
+{
+  "symbol": "AAPL",
+  "price": 196.45,
+  "timestamp": "2025-06-15T02:38:16.379478",
+  "provider": "alpha_vantage"
+}
+
+
+
+#POST
+
+
+{
+  "symbols": ["AAPL", "MSFT"],
+  "interval": 60,
+  "provider": "alpha_vantage"
+}
+
+{
+  "job_id": "poll_20250615024308",
+  "status": "accepted",
+  "config": {
+    "symbols": [
+      "AAPL",
+      "MSFT"
+    ],
+    "interval": 60,
+    "provider": "alpha_vantage"
+  }
+}

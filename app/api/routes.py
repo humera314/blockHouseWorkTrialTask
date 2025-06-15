@@ -63,7 +63,6 @@ async def get_latest_price(
         db.close()
 
 
-# ✅ Add schema for polling request and response
 class PollRequest(BaseModel):
     symbols: List[str]
     interval: int
